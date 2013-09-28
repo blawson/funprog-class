@@ -31,10 +31,13 @@ object FixedPoint {
                                                   //| guess = 1.9990234375
                                                   //| guess = 1.99951171875
                                                   //| res0: Double = 1.999755859375
-  
-  def sqrt(x: Double) = fixedPoint(y => (y + x / y) / 2)(1.0)
-                                                  //> sqrt: (x: Double)Double
+                                                  
+  def averageDamp(f: Double => Double)(x: Double) = (x + f(x)) / 2
+                                                  //> averageDamp: (f: Double => Double)(x: Double)Double
 
+  def sqrt(x: Double) =
+  	fixedPoint(averageDamp(y => x / y))(1.0)  //> sqrt: (x: Double)Double
+                                                  
 	sqrt(2)                                   //> guess = 1.0
                                                   //| guess = 1.5
                                                   //| guess = 1.4166666666666665
