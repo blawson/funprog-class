@@ -26,9 +26,7 @@ class Rational(x: Int, y: Int) {
 		new Rational(-numer, denom)
 		
 	def sub(that: Rational) =
-		new Rational(
-			numer * that.denom - that.numer * denom,
-			denom * that.denom)
+		add(that.neg)
 	
 	override def toString =
 		numer + "/"+ denom
