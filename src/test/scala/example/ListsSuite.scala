@@ -5,6 +5,8 @@ import org.scalatest.FunSuite
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 
+import week2.Lists.*;
+
 /**
  * This class implements a ScalaTest test suite for the methods in object
  * `Lists` that need to be implemented as part of this assignment. A test
@@ -100,7 +102,7 @@ class ListsSuite extends FunSuite {
    * implemented for this assignment. We fist import all members of the
    * `List` object.
    */ 
-  import Lists._
+import Lists._
   
 
   /**

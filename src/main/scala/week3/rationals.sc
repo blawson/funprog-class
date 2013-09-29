@@ -11,11 +11,22 @@ object rationals {
 	val z = new Rational(3, 2)                //> z  : week3.Rational = 3/2
 	
 	x.sub(y).sub(z)                           //> res3: week3.Rational = -79/42
+	y.add(y)                                  //> res4: week3.Rational = 10/7
+	
+	x.less(y)                                 //> res5: Boolean = true
+	x.max(y)                                  //> res6: week3.Rational = 5/7
 }
 
 class Rational(x: Int, y: Int) {
-	def numer = x
-	def denom = y
+	// Calculate gcd initially so it is called only once
+	private def gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
+	private val g = gcd(x, y)
+	def numer = x / g
+	def denom = y / g
+	
+	def less(that: Rational) = numer * that.denom < that.numer * denom
+	
+	def max(that: Rational) = if (this.less(that)) that else this
 	
 	def add(that: Rational) =
 		new Rational(

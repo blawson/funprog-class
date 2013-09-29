@@ -1,4 +1,4 @@
-package example
+package week2
 
 import common._
 import java.util.NoSuchElementException
