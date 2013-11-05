@@ -7,6 +7,7 @@ trait List[+T] {
 	def isEmpty: scala.Boolean
 	def head: T
 	def tail: List[T]
+	def prepent [U >: T] (elem: U): List[U] = new Cons(elem, this)
 }
 
 class Cons[T](val head: T, val tail: List[T]) extends List[T] {
