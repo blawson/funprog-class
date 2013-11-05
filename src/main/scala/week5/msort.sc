@@ -4,7 +4,7 @@ import scala.math.Ordering
 
 object msort {
 
-	def msort[T](xs: List[T])(ord: Ordering[T]): List[T] = {
+	def msort[T](xs: List[T])(implicit ord: Ordering[T]): List[T] = {
 		val n = xs.length / 2
 		if (n == 0) xs
 		else {
@@ -18,14 +18,14 @@ object msort {
 			}
 				
 			val (fst, snd) = xs splitAt n
-			merge(msort(fst)(ord), msort(snd)(ord))
+			merge(msort(fst), msort(snd))
 		}
-	}                                         //> msort: [T](xs: List[T])(ord: scala.math.Ordering[T])List[T]
+	}                                         //> msort: [T](xs: List[T])(implicit ord: scala.math.Ordering[T])List[T]
 	
 	val nums = List(2, -4, 5, 7, 1)           //> nums  : List[Int] = List(2, -4, 5, 7, 1)
 	val fruits = List("apple", "pineapple", "orange", "banana")
                                                   //> fruits  : List[String] = List(apple, pineapple, orange, banana)
 	
-	msort(nums)(Ordering.Int)                 //> res0: List[Int] = List(-4, 1, 2, 5, 7)
-	msort(fruits)(Ordering.String)            //> res1: List[String] = List(apple, banana, orange, pineapple)
+	msort(nums)                               //> res0: List[Int] = List(-4, 1, 2, 5, 7)
+	msort(fruits)                             //> res1: List[String] = List(apple, banana, orange, pineapple)
 }
