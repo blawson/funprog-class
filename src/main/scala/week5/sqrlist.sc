@@ -9,12 +9,9 @@ object sqrlist {
 	
 	def squareList2(xs: List[Int]): List[Int] =
 		xs map (_ ^ 2)                    //> squareList2: (xs: List[Int])List[Int]
-		
 			
-	def posElems(xs: List[Int]): List[Int] = xs match {
-		case Nil => xs
-		case y :: ys => if (y > 0) y :: posElems(ys) else posElems(ys)
-	}                                         //> posElems: (xs: List[Int])List[Int]
+	def posElems(xs: List[Int]): List[Int] =
+		xs filter (_ > 0)                 //> posElems: (xs: List[Int])List[Int]
 		
 	val list = List(1, 2, 3, 4)               //> list  : List[Int] = List(1, 2, 3, 4)
 	
