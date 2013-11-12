@@ -2,7 +2,8 @@ package week6
 
 object polynomials {
 
-	class Poly(val terms: Map[Int, Double]) {
+	class Poly(terms0: Map[Int, Double]) {
+		val terms = terms0 withDefaultValue 0.0
 		def + (other: Poly) = new Poly(terms ++ (other.terms map adjust))
 		
 		// apply this function over all terms
