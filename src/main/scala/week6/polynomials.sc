@@ -6,12 +6,12 @@ object polynomials {
 		// add a new constructor that takes multiple pairs and calls the default constructor
 		def this(bindings: (Int, Double)*) = this(bindings.toMap)
 		val terms = terms0 withDefaultValue 0.0
-		def + (other: Poly) = new Poly(terms ++ (other.terms map adjust))
+		def + (other: Poly) = new Poly((other.terms foldLeft terms)(addTerm))
 		
 		// apply this function over all terms
-		def adjust(term: (Int, Double)): (Int, Double) = {
+		def addTerm(terms: Map[Int, Double], term: (Int, Double)): Map[Int, Double] = {
 			val (exp, coeff) = term
-			exp -> (coeff + terms(exp))
+			terms + (exp -> (coeff + terms(exp)))
 		}
 		
 		override def toString =
