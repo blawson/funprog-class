@@ -9,11 +9,9 @@ object polynomials {
 		// apply this function over all terms
 		def adjust(term: (Int, Double)): (Int, Double) = {
 			val (exp, coeff) = term
-			terms get exp match {
-				case Some(coeff1) => exp -> (coeff + coeff1)
-				case None => exp -> coeff
-			}
+			exp -> (coeff + terms(exp))
 		}
+		
 		override def toString =
 			(for ((exp, coeff) <- terms.toList.sorted.reverse) yield coeff+"x^"+exp) mkString " + "
 	}
@@ -23,5 +21,5 @@ object polynomials {
 	val p2 = new Poly(Map(0 -> 3.0, 3 -> 7.0))//> p2  : week6.polynomials.Poly = 7.0x^3 + 3.0x^0
 	
 	p1 + p2                                   //> res0: week6.polynomials.Poly = 6.2x^5 + 11.0x^3 + 2.0x^1 + 3.0x^0
-	
+	p1.terms(7)                               //> res1: Double = 0.0
 }
