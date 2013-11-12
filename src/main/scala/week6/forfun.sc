@@ -16,7 +16,7 @@ object forfun {
 	// Similar to exercise from the pairs.sc worksheet
 	def isPrime(n: Int) = (2 until n) forall (n % _ != 0)
                                                   //> isPrime: (n: Int)Boolean
-	
+	// Using the for syntax
 	def primesWithFor(n: Int) =
 		for {
 			i <- 1 until n
@@ -30,6 +30,7 @@ object forfun {
 			(1 until i).withFilter(j => isPrime(i + j))
 				.map(j => (i, j)))//> primesWithTranslations: (n: Int)scala.collection.immutable.IndexedSeq[(Int, 
                                                   //| Int)]
+  // These are identical outputs
 	primesWithFor(5)                          //> res1: scala.collection.immutable.IndexedSeq[(Int, Int)] = Vector((2,1), (3,2
                                                   //| ), (4,1), (4,3))
  	primesWithTranslations(5)                 //> res2: scala.collection.immutable.IndexedSeq[(Int, Int)] = Vector((2,1), (3,2
