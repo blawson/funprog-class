@@ -32,25 +32,26 @@ class Pouring(capacity: Vector[Int]) {
 	  (for (from <- glasses; to <- glasses if from != to) yield Pour(from, to))
 	  
 	// move paths
-	class Path(history: List[Move]) {
-	  def endState: State = (history foldRight initialState) (_ change _)
-	  def extend(move: Move) = new Path(move :: history)
+	class Path(history: List[Move], val endState: State) {
+	  def extend(move: Move) = new Path(move :: history, move change endState)
 	  override def toString = (history.reverse mkString " ") + "--> " + endState
 	}
 	
-	val initialPath = new Path(Nil)
+	val initialPath = new Path(Nil, initialState)
 	
-	def from(paths: Set[Path]): Stream[Set[Path]] =
+	// state exploration function
+	def from(paths: Set[Path], explored: Set[State]): Stream[Set[Path]] =
 	  if (paths.isEmpty) Stream.empty
 	  else {
 	    val more = for {
 	      path <- paths
 	      next <- moves map path.extend 
+	      if !(explored contains next.endState)
 	    } yield next
-	    paths #:: from(more)
+	    paths #:: from(more, explored ++ (more map (_.endState)))
 	  }
 	
-	val pathSets = from(Set(initialPath))
+	val pathSets = from(Set(initialPath), Set(initialState))
 	
 	def solution(target: Int): Stream[Path] =
 	  for {
